@@ -1,9 +1,12 @@
-name: Publish automatically on tag
+name: Manual version publish
 
 on:
-  push:
-    tags:
-      - "*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Traefik version (e.g. 2.6.1)"
+        required: true
+        type: string
 
 jobs:
   build:
@@ -22,10 +25,6 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Get the tag
-        id: get_tag
-        run: echo ::set-output name=TAG::$(echo $GITHUB_REF | cut -d / -f 3)
-
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
@@ -34,7 +33,7 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           # Get the tag and use that as the Traefik version
-          build-args: TRAEFIK_VERSION=${{ steps.get_tag.outputs.TAG }}
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/traefik:${{ steps.get_tag.outputs.TAG }}
+          build-args: TRAEFIK_VERSION=${{ inputs.version }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/traefik:${{ inputs.version }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/traefik:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/traefik:buildcache,mode=max
