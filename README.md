@@ -1,6 +1,7 @@
 # Traefik OCI Image
 
-This repository contains the source for creating a Ubuntu-based OCI image for Traefik.
+This repository contains the source for creating a Ubuntu-based OCI image for
+[Traefik](https://traefik.io/).
 
 The build is composed of three stages:
 
@@ -8,21 +9,20 @@ The build is composed of three stages:
 - Building Traefik
 - Creating a Ubuntu based container with the Traefik binary
 
-The resulting container is based on `ubuntu:focal`. The default user is `traefik`, and the directory
-`/etc/traefik` is owned by that user.
+The resulting container is based on `ubuntu:focal`. The default user is `traefik`, and the
+directory `/etc/traefik` is owned by that user.
 
-## Building
+## Building / Testing
 
 You can build the image like so (note that setting the build arg is mandatory):
 
 ```bash
-
-$ docker build -t jnsgruk/traefik  --build-arg TRAEFIK_VERSION=2.6.1 .
+$ docker build -t jnsgruk/traefik --build-arg TRAEFIK_VERSION=2.6.1 .
 ```
 
-## Quick Validation
+### Quick Validation
 
-Once the image is build, you can test like so:
+Once the image is built, you can test like so:
 
 ```bash
 docker run \
@@ -32,4 +32,5 @@ docker run \
   --api.dashboard=true --api.insecure=true --log.level=DEBUG
 ```
 
-You should then be able to visit [http://localhost:8080/dashboard/](http://localhost:8080/dashboard/).
+You should then be able to visit
+[http://localhost:8080/dashboard/](http://localhost:8080/dashboard/).
