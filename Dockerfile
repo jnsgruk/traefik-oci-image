@@ -42,9 +42,7 @@ ARG GOGC=off
 COPY --from=yq /src/traefik /root/traefik
 WORKDIR /root/traefik
 
-# Fetch the go deps before the build (run in own layer for caching during build tests!)
-RUN go mod tidy
-
+# Build Traefik from source
 RUN mkdir -p dist && \
     # Required to merge non-code components into the final binary such as the web dashboard/UI
     go generate && \

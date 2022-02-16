@@ -1,4 +1,4 @@
-name: Publish automatically on tag
+name: Lint & Build
 
 on:
   pull_request:
@@ -41,6 +41,6 @@ jobs:
           # Do not publish the image!
           push: false
           # Get the tag and use that as the Traefik version
-          build-args: TRAEFIK_VERSION==${{ steps.get_version.outputs.VERSION }}
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/traefik:=${{ steps.get_version.outputs.VERSION }}
+          build-args: TRAEFIK_VERSION=${{ steps.get_version.outputs.VERSION }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/traefik:${{ steps.get_version.outputs.VERSION }}
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/traefik:buildcache
