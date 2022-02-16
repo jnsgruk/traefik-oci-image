@@ -1,4 +1,4 @@
-name: Publish automatically on tag
+name: Lint & Build
 
 on:
   pull_request:
