@@ -43,6 +43,7 @@ COPY --from=yq /src/traefik /root/traefik
 WORKDIR /root/traefik
 
 RUN mkdir -p dist && \
+    go mod tidy && \
     # Required to merge non-code components into the final binary such as the web dashboard/UI
     go generate && \
     # Build Traefik per https://github.com/traefik/traefik/raw/v2.6.1/script/binary
