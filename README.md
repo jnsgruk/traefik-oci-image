@@ -12,6 +12,22 @@ The build is composed of three stages:
 The resulting container is based on `ubuntu:focal`. The default user is `traefik`, and the
 directory `/etc/traefik` is owned by that user.
 
+## Releasing a new version
+
+To release a new version of the image, [create a Pull
+Request](https://github.com/jnsgruk/traefik-oci-image/compare) ensuring that you update the
+[`version`](./version) file to represent the **version of Traefik** you want the image to contain.
+
+Once the PR's workflows have passed, merge the PR and tag the commit with the Traefik version on
+the `main` branch, e.g.
+
+```
+git tag -a 2.6.1
+git push origin 2.6.1
+```
+
+This will trigger a workflow to build the image, and publish to Docker Hub.
+
 ## Building / Testing
 
 You can build the image like so (note that setting the build arg is mandatory):

@@ -42,6 +42,7 @@ ARG GOGC=off
 COPY --from=yq /src/traefik /root/traefik
 WORKDIR /root/traefik
 
+# Build Traefik from source
 RUN mkdir -p dist && \
     go mod tidy && \
     # Required to merge non-code components into the final binary such as the web dashboard/UI
