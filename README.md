@@ -17,7 +17,7 @@ directory `/etc/traefik` is owned by that user.
 You can build the image like so (note that setting the build arg is mandatory):
 
 ```bash
-$ docker build -t jnsgruk/traefik --build-arg TRAEFIK_VERSION=2.6.1 .
+$ docker build -t jnsgruk/traefik --build-arg TRAEFIK_VERSION="$(cat version)" .
 ```
 
 ### Quick Validation
