@@ -41,6 +41,6 @@ jobs:
           push: true
           # Get the tag and use that as the Traefik version
           build-args: TRAEFIK_VERSION=${{ steps.get_version.outputs.VERSION }}
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/traefik:${{ steps.get_version.outputs.VERSION }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/traefik:${{ steps.get_version.outputs.VERSION }},${{ secrets.DOCKER_HUB_USERNAME }}/traefik:latest 
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/traefik:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/traefik:buildcache,mode=max
