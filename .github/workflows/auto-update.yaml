@@ -51,7 +51,7 @@ jobs:
           # Get the current version from the repo
           CURRENT="$(cat version)"
           # Update the version (strip the leading 'v' from the LATEST version)
-          echo "${$LATEST/v/}" > version
+          echo "${LATEST/v/}" > version
 
       # We use a Github App and token to allow Github Actions to run properly on the created PR.
       - uses: tibdex/github-app-token@v1
